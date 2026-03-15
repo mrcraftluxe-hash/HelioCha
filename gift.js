@@ -10,17 +10,19 @@ let messages = [];
 
 // ========== БАЗА USERNAME ДЛЯ БЕСКОНЕЧНЫХ КРИСТАЛЛОВ ==========
 const INFINITE_CRYSTALS_USERNAMES = [
-    'mrcraftluxeyt', 'admin', 'yourusername', 'test'
+    'danya', 'admin', 'yourusername', 'test'
 ];
 
 // ========== БАЗА ПОДАРКОВ ==========
 const GIFTS_DB = [
-    { id: 1, name: 'Plush Pepe', price: 50, emoji: '🐸', sticker: '✨', desc: 'Model Midas Pepe', backdrop: 'Steel Grey', symbol: 'Chocolate' },
-    { id: 2, name: 'Gold Pepe', price: 100, emoji: '🐸', sticker: '⭐', desc: 'Model Gold Pepe', backdrop: 'Gold', symbol: 'Diamond' },
-    { id: 3, name: 'Diamond Pepe', price: 150, emoji: '🐸', sticker: '💎', desc: 'Model Diamond Pepe', backdrop: 'Blue', symbol: 'Crown' },
-    { id: 4, name: 'Rainbow Pepe', price: 300, emoji: '🌈', sticker: '🦄', desc: 'Model Rainbow Pepe', backdrop: 'Rainbow', symbol: 'Star' },
-    { id: 5, name: 'Dark Pepe', price: 500, emoji: '👾', sticker: '🌑', desc: 'Model Dark Pepe', backdrop: 'Black', symbol: 'Moon' },
-    { id: 6, name: 'Royal Pepe', price: 1000, emoji: '👑', sticker: '👑', desc: 'Model Royal Pepe', backdrop: 'Purple', symbol: 'Crown' }
+    { id: 1, name: '🧸 Мишка', price: 15, emoji: '🧸', sticker: '🎀', desc: 'Мягкий плюшевый мишка' },
+    { id: 2, name: '❤️ Сердечко', price: 15, emoji: '❤️', sticker: '✨', desc: 'Красное сердечко' },
+    { id: 3, name: '💍 Колечко', price: 50, emoji: '💍', sticker: '💎', desc: 'Золотое колечко' },
+    { id: 4, name: '🚀 Ракета', price: 50, emoji: '🚀', sticker: '⭐', desc: 'Космическая ракета' },
+    { id: 5, name: '💐 Букет', price: 100, emoji: '💐', sticker: '🌸', desc: 'Красивый букет цветов' },
+    { id: 6, name: '✈️ Самолёт', price: 100, emoji: '✈️', sticker: '🛫', desc: 'Пассажирский самолёт' },
+    { id: 7, name: '💘 Сердечко со стрелой', price: 250, emoji: '💘', sticker: '🏹', desc: 'Простреленное сердечко' },
+    { id: 8, name: '🎀 Сердечко с бантиком', price: 500, emoji: '🎀', sticker: '💝', desc: 'Сердечко с розовым бантиком' }
 ];
 
 // ========== ПОЛУЧИТЬ USERNAME ==========
@@ -87,10 +89,6 @@ function loadGifts() {
         html += '<div class="gift-emoji">' + gift.emoji + '</div>';
         html += '<div class="gift-name">' + gift.name + '</div>';
         html += '<div class="gift-desc">' + gift.desc + '</div>';
-        html += '<div class="gift-details">';
-        html += '<div class="gift-backdrop">🎨 ' + gift.backdrop + '</div>';
-        html += '<div class="gift-symbol">🔮 ' + gift.symbol + '</div>';
-        html += '</div>';
         html += '<div class="gift-price">💎 ' + gift.price + '</div>';
         if (!canBuy) {
             html += '<div class="gift-lock">🔒</div>';
@@ -167,7 +165,6 @@ function showGiftDetails(giftId, userId) {
     closeModal();
     
     const infinite = hasInfiniteCrystals();
-    const username = getCurrentUsername();
     
     let infiniteBadge = '';
     if (infinite) {
@@ -184,18 +181,10 @@ function showGiftDetails(giftId, userId) {
                 <div class="gift-preview-sticker">${gift.sticker}</div>
                 <div class="gift-preview-emoji">${gift.emoji}</div>
                 <div class="gift-preview-name">${gift.name}</div>
-                <div class="gift-preview-id">#${gift.id}${String(userId).slice(-4)}</div>
+                <div class="gift-preview-price">${gift.price} 💎</div>
             </div>
             
             <div class="gift-info-grid">
-                <div class="info-row">
-                    <span class="info-label">Название:</span>
-                    <span class="info-value">${gift.name}</span>
-                </div>
-                <div class="info-row">
-                    <span class="info-label">Цена:</span>
-                    <span class="info-value price">${gift.price} 💎</span>
-                </div>
                 <div class="info-row">
                     <span class="info-label">От:</span>
                     <span class="info-value">${currentUser.displayName || currentUser.name || currentUser.username}</span>
@@ -203,21 +192,6 @@ function showGiftDetails(giftId, userId) {
                 <div class="info-row">
                     <span class="info-label">Кому:</span>
                     <span class="info-value">${user.displayName || user.name || user.username}</span>
-                </div>
-            </div>
-            
-            <div class="gift-attributes">
-                <div class="attribute">
-                    <span class="attribute-label">Model</span>
-                    <span class="attribute-value">${gift.desc}</span>
-                </div>
-                <div class="attribute">
-                    <span class="attribute-label">Backdrop</span>
-                    <span class="attribute-value">${gift.backdrop}</span>
-                </div>
-                <div class="attribute">
-                    <span class="attribute-label">Symbol</span>
-                    <span class="attribute-value">${gift.symbol}</span>
                 </div>
             </div>
             
@@ -235,7 +209,6 @@ function showGiftDetails(giftId, userId) {
     
     document.body.appendChild(modal);
 }
-
 
 // ========== ОТПРАВИТЬ ПОДАРОК ==========
 function sendGift(giftId, userId) {
@@ -267,8 +240,6 @@ function sendGift(giftId, userId) {
         sticker: gift.sticker,
         price: gift.price,
         desc: gift.desc,
-        backdrop: gift.backdrop,
-        symbol: gift.symbol,
         fromUser: currentUser.id,
         fromName: currentUser.displayName || currentUser.name || currentUser.username,
         fromAvatar: currentUser.avatar,
@@ -290,7 +261,7 @@ function sendGift(giftId, userId) {
     sentGifts.push(giftData);
     localStorage.setItem('sentGifts_' + currentUser.id, JSON.stringify(sentGifts));
     
-    // ========== ОТПРАВЛЯЕМ В ЧАТ ==========
+    // отправляем в чат
     let allMessages = JSON.parse(localStorage.getItem('helioMessages')) || [];
     
     const chatMessage = {
@@ -314,8 +285,6 @@ function sendGift(giftId, userId) {
     
     allMessages.push(chatMessage);
     localStorage.setItem('helioMessages', JSON.stringify(allMessages));
-    
-    console.log('✅ Подарок отправлен в чат:', chatMessage);
     
     closeModal();
     alert('✅ Подарок отправлен!');
@@ -349,7 +318,8 @@ function loadMyGifts() {
             html += '<div class="gift-card-sticker">' + (gift.sticker || '✨') + '</div>';
             html += '<div class="gift-card-emoji">' + gift.emoji + '</div>';
             html += '<div class="gift-card-name">' + gift.name + '</div>';
-            html += '<div class="gift-card-id">' + (gift.uniqueId || '#' + gift.giftId + String(gift.id).slice(-4)) + '</div>';
+            html += '<div class="gift-card-price">' + gift.price + ' 💎</div>';
+            html += '<div class="gift-card-id">' + gift.uniqueId + '</div>';
             html += '</div>';
             
             html += '<div class="gift-card-info">';
@@ -357,9 +327,6 @@ function loadMyGifts() {
             if (gift.message) {
                 html += '<div class="info-line message">💬 "' + gift.message + '"</div>';
             }
-            html += '<div class="info-line"><span class="info-label">Model</span> ' + gift.desc + '</div>';
-            html += '<div class="info-line"><span class="info-label">Backdrop</span> ' + gift.backdrop + '</div>';
-            html += '<div class="info-line"><span class="info-label">Symbol</span> ' + gift.symbol + '</div>';
             html += '<div class="info-line date">' + date + '</div>';
             html += '</div>';
             
@@ -403,7 +370,8 @@ function loadSentGifts() {
             html += '<div class="gift-card-sticker">' + (gift.sticker || '✨') + '</div>';
             html += '<div class="gift-card-emoji">' + gift.emoji + '</div>';
             html += '<div class="gift-card-name">' + gift.name + '</div>';
-            html += '<div class="gift-card-id">' + (gift.uniqueId || '#' + gift.giftId + String(gift.id).slice(-4)) + '</div>';
+            html += '<div class="gift-card-price">' + gift.price + ' 💎</div>';
+            html += '<div class="gift-card-id">' + gift.uniqueId + '</div>';
             html += '</div>';
             
             html += '<div class="gift-card-info">';
