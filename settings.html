@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>HelioChat - Настройки</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="settings-page">
+        <!-- Шапка -->
+        <div class="settings-header">
+            <button class="back-btn" onclick="goBack()">←</button>
+            <h2>⚙️ Настройки</h2>
+            <button class="save-btn" onclick="saveSettings()">💾</button>
+        </div>
+        
+        <!-- Уведомления -->
+        <div class="settings-section">
+            <h3>Уведомления</h3>
+            
+            <div class="settings-item">
+                <div>
+                    <div class="settings-item-title">Push-уведомления</div>
+                    <div class="settings-item-desc">Получать уведомления о новых сообщениях</div>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="notifications" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+            
+            <div class="settings-item">
+                <div>
+                    <div class="settings-item-title">Звук</div>
+                    <div class="settings-item-desc">Звуковой сигнал при новых сообщениях</div>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="sounds" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+            
+            <div class="settings-item">
+                <div>
+                    <div class="settings-item-title">Вибро</div>
+                    <div class="settings-item-desc">Вибрация при новых сообщениях</div>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="vibration" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+        
+        <!-- Чаты -->
+        <div class="settings-section">
+            <h3>Чаты</h3>
+            
+            <div class="settings-item">
+                <div>
+                    <div class="settings-item-title">Предпросмотр</div>
+                    <div class="settings-item-desc">Показывать текст сообщения в списке чатов</div>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="preview" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+            
+            <div class="settings-item">
+                <div>
+                    <div class="settings-item-title">Enter для отправки</div>
+                    <div class="settings-item-desc">Отправлять сообщение по Enter</div>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="enterSend" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+            
+            <div class="settings-item">
+                <div>
+                    <div class="settings-item-title">Автосохранение</div>
+                    <div class="settings-item-desc">Автоматически сохранять черновики</div>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="autoSave" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+        
+        <!-- Оформление -->
+        <div class="settings-section">
+            <h3>Оформление</h3>
+            
+            <div class="settings-item">
+                <div>
+                    <div class="settings-item-title">Тема</div>
+                </div>
+                <select id="theme" class="settings-select">
+                    <option value="dark">🌑 Темная</option>
+                    <option value="light">☀️ Светлая</option>
+                </select>
+            </div>
+            
+            <div class="settings-item">
+                <div>
+                    <div class="settings-item-title">Размер шрифта</div>
+                </div>
+                <select id="fontSize" class="settings-select">
+                    <option value="small">🔹 Маленький</option>
+                    <option value="medium" selected>🔸 Средний</option>
+                    <option value="large">🔹 Большой</option>
+                </select>
+            </div>
+            
+            <div class="settings-item">
+                <div>
+                    <div class="settings-item-title">Язык</div>
+                </div>
+                <select id="language" class="settings-select">
+                    <option value="ru">🇷🇺 Русский</option>
+                    <option value="en">🇬🇧 English</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- Данные -->
+        <div class="settings-section">
+            <h3>Данные</h3>
+            
+            <div class="settings-item" onclick="clearAllData()" style="cursor: pointer;">
+                <div>
+                    <div class="settings-item-title">🗑️ Очистить все чаты</div>
+                    <div class="settings-item-desc">Удалить все сообщения</div>
+                </div>
+                <span class="arrow">→</span>
+            </div>
+            
+            <div class="settings-item" onclick="resetSettings()" style="cursor: pointer;">
+                <div>
+                    <div class="settings-item-title">🔄 Сбросить настройки</div>
+                    <div class="settings-item-desc">Вернуть значения по умолчанию</div>
+                </div>
+                <span class="arrow">→</span>
+            </div>
+            
+            <div class="settings-item danger" onclick="deleteAccount()" style="cursor: pointer;">
+                <div>
+                    <div class="settings-item-title">⚠️ Удалить аккаунт</div>
+                    <div class="settings-item-desc">Это действие нельзя отменить</div>
+                </div>
+                <span class="arrow">→</span>
+            </div>
+        </div>
+        
+        <!-- Версия -->
+        <div class="settings-footer">
+            <div>HelioChat v1.0.0</div>
+            <div style="color: #666; font-size: 12px; margin-top: 5px;">© 2024 HelioChat</div>
+        </div>
+    </div>
+    
+    <script src="auth.js"></script>
+    <script src="settings.js"></script>
+</body>
+</html>
