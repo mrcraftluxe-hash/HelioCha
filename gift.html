@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>HelioChat - Подарки</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="gifts-page">
+        <!-- Шапка -->
+        <div class="gifts-header">
+            <button class="back-btn" onclick="goBack()">←</button>
+            <h2>🎁 Подарки</h2>
+            <button class="refresh-btn" onclick="loadGifts()">🔄</button>
+        </div>
+        
+        <!-- Баланс кристаллов -->
+        <div class="crystals-balance">
+            <span>💎</span>
+            <span id="balanceAmount">0</span>
+        </div>
+        
+        <!-- Вкладки -->
+        <div class="gifts-tabs">
+            <button class="gifts-tab active" onclick="switchGiftsTab('shop')">🛍️ Магазин</button>
+            <button class="gifts-tab" onclick="switchGiftsTab('my')">📦 Мои</button>
+            <button class="gifts-tab" onclick="switchGiftsTab('sent')">📤 Отправленные</button>
+        </div>
+        
+        <!-- Магазин подарков -->
+        <div id="giftsShop" class="gifts-shop active">
+            <div class="gifts-grid" id="giftsGrid"></div>
+        </div>
+        
+        <!-- Мои подарки -->
+        <div id="myGifts" class="my-gifts" style="display: none;">
+            <div class="gifts-list" id="myGiftsList"></div>
+        </div>
+        
+        <!-- Отправленные подарки -->
+        <div id="sentGifts" class="sent-gifts" style="display: none;">
+            <div class="gifts-list" id="sentGiftsList"></div>
+        </div>
+    </div>
+    
+    <script src="auth.js"></script>
+    <script src="gift.js"></script>
+</body>
+</html>

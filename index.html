@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>HelioChat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <h1>HelioChat</h1>
+            <p class="subtitle">Начни общение прямо сейчас</p>
+            
+            <!-- ЭТАП 1: СТАРТ -->
+            <div id="startScreen" class="start-screen">
+                <div class="start-icon">💬</div>
+                <h2>Добро пожаловать!</h2>
+                <p>Введи номер телефона, чтобы войти или зарегистрироваться</p>
+                <button onclick="showPhoneInput()" class="start-btn">Начать общение</button>
+            </div>
+            
+            <!-- ЭТАП 2: ВВОД НОМЕРА -->
+            <div id="phoneScreen" class="phone-screen" style="display: none;">
+                <div class="back-btn" onclick="showStart()">←</div>
+                <h2>Вход по номеру</h2>
+                <p class="hint">Введи номер телефона</p>
+                
+                <div class="phone-input-container">
+                    <select id="countryCode" class="country-code">
+                        <option value="+7" selected>🇷🇺 +7</option>
+                        <option value="+380">🇺🇦 +380</option>
+                        <option value="+375">🇧🇾 +375</option>
+                        <option value="+77">🇰🇿 +77</option>
+                    </select>
+                    <input type="tel" id="phoneNumber" class="phone-number" placeholder="999 123-45-67">
+                </div>
+                
+                <button onclick="sendPhoneCode()" class="next-btn">Далее</button>
+                <p class="terms">Мы пришлем код подтверждения в SMS</p>
+            </div>
+            
+            <!-- ЭТАП 3: ПОДТВЕРЖДЕНИЕ КОДА -->
+            <div id="codeScreen" class="code-screen" style="display: none;">
+                <div class="back-btn" onclick="showPhone()">←</div>
+                <h2>Подтверждение</h2>
+                <p class="hint">Введи код из SMS</p>
+                <p class="phone-display" id="displayPhone"></p>
+                
+                <div class="code-input-container">
+                    <input type="text" id="code1" maxlength="1" class="code-digit" onkeyup="moveToNext(this, 'code2')" autofocus>
+                    <input type="text" id="code2" maxlength="1" class="code-digit" onkeyup="moveToNext(this, 'code3')">
+                    <input type="text" id="code3" maxlength="1" class="code-digit" onkeyup="moveToNext(this, 'code4')">
+                    <input type="text" id="code4" maxlength="1" class="code-digit" onkeyup="moveToNext(this, 'code5')">
+                    <input type="text" id="code5" maxlength="1" class="code-digit" onkeyup="moveToNext(this, 'code6')">
+                    <input type="text" id="code6" maxlength="1" class="code-digit" onkeyup="moveToNext(this, 'done')">
+                </div>
+                
+                <button onclick="verifyPhoneCode()" class="next-btn" id="verifyBtn">Подтвердить</button>
+                <p class="resend" onclick="resendCode()">Отправить код еще раз</p>
+                <p class="code-hint" id="codeHint" style="color:#2b5278; font-size:12px;"></p>
+            </div>
+            
+            <!-- ЭТАП 4: ЧАТЫ (РЕДИРЕКТ) -->
+        </div>
+    </div>
+    
+    <script src="auth.js"></script>
+</body>
+</html>

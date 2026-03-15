@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>HelioChat - Группа</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="group-container">
+        <!-- Шапка группы -->
+        <div class="group-header">
+            <button class="back-btn" onclick="goBack()">←</button>
+            <div class="group-info-header">
+                <div class="group-avatar-large" id="groupAvatar">👥</div>
+                <div class="group-title-info">
+                    <h2 id="groupName">Загрузка...</h2>
+                    <div class="group-meta">
+                        <span id="groupMembers">0</span> участников
+                        <span class="group-type" id="groupType"></span>
+                    </div>
+                </div>
+            </div>
+            <button class="group-menu-btn" onclick="showGroupMenu()">⋮</button>
+        </div>
+        
+        <!-- Описание группы -->
+        <div class="group-description" id="groupDescription">
+            Загрузка описания...
+        </div>
+        
+        <!-- Вкладки -->
+        <div class="group-tabs">
+            <button class="group-tab active" onclick="switchGroupTab('chat')">💬 Чат</button>
+            <button class="group-tab" onclick="switchGroupTab('members')">👥 Участники</button>
+            <button class="group-tab" onclick="switchGroupTab('media')">📸 Медиа</button>
+            <button class="group-tab" onclick="switchGroupTab('files')">📁 Файлы</button>
+        </div>
+        
+        <!-- Чат группы -->
+        <div id="groupChat" class="group-chat active">
+            <div class="group-messages" id="groupMessages">
+                <!-- Сообщения будут здесь -->
+            </div>
+            
+            <div class="group-message-input">
+                <input type="text" id="groupMessageInput" placeholder="Написать сообщение..." onkeypress="checkGroupEnter(event)">
+                <button class="send-group-btn" onclick="sendGroupMessage()">📤</button>
+            </div>
+        </div>
+        
+        <!-- Участники -->
+        <div id="groupMembersList" class="group-members-list" style="display: none;">
+            <div class="loading">Загрузка участников...</div>
+        </div>
+        
+        <!-- Медиа -->
+        <div id="groupMedia" class="group-media" style="display: none;">
+            <div class="no-media">📸 Нет медиафайлов</div>
+        </div>
+        
+        <!-- Файлы -->
+        <div id="groupFiles" class="group-files" style="display: none;">
+            <div class="no-files">📁 Нет файлов</div>
+        </div>
+        
+        <!-- Панель администратора -->
+        <div class="group-admin-panel" id="groupAdminPanel" style="display: none;">
+            <button class="admin-btn" onclick="addMember()">➕ Добавить участника</button>
+            <button class="admin-btn" onclick="editGroup()">✏️ Редактировать группу</button>
+            <button class="admin-btn delete" onclick="leaveGroup()">🚪 Покинуть группу</button>
+        </div>
+    </div>
+    
+    <script src="auth.js"></script>
+    <script src="group.js"></script>
+</body>
+</html>

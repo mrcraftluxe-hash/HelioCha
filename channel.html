@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>HelioChat - Канал</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="channel-container">
+        <!-- Шапка канала -->
+        <div class="channel-header">
+            <button class="back-btn" onclick="goBack()">←</button>
+            <div class="channel-info-header">
+                <div class="channel-avatar-large" id="channelAvatar">📢</div>
+                <div class="channel-title-info">
+                    <h2 id="channelName">Загрузка...</h2>
+                    <div class="channel-meta">
+                        <span id="channelSubscribers">0</span> подписчиков
+                        <span class="channel-type" id="channelType"></span>
+                    </div>
+                </div>
+            </div>
+            <button class="channel-menu-btn" onclick="showChannelMenu()">⋮</button>
+        </div>
+        
+        <!-- Описание канала -->
+        <div class="channel-description" id="channelDescription">
+            Загрузка описания...
+        </div>
+        
+        <!-- Кнопка подписки/отписки -->
+        <div class="channel-action" id="channelActionArea">
+            <button class="subscribe-channel-btn" id="subscribeBtn" onclick="toggleSubscribe()">📢 Подписаться</button>
+        </div>
+        
+        <!-- Вкладки -->
+        <div class="channel-tabs">
+            <button class="channel-tab active" onclick="switchChannelTab('posts')">📝 Посты</button>
+            <button class="channel-tab" onclick="switchChannelTab('about')">ℹ️ О канале</button>
+            <button class="channel-tab" onclick="switchChannelTab('members')">👥 Подписчики</button>
+        </div>
+        
+        <!-- Посты -->
+        <div id="channelPosts" class="channel-posts active">
+            <div class="loading">Загрузка постов...</div>
+        </div>
+        
+        <!-- О канале -->
+        <div id="channelAbout" class="channel-about" style="display: none;">
+            <div class="about-section">
+                <h4>📋 Описание</h4>
+                <p id="aboutDescription">Загрузка...</p>
+            </div>
+            <div class="about-section">
+                <h4>👑 Владелец</h4>
+                <p id="aboutOwner">Загрузка...</p>
+            </div>
+            <div class="about-section">
+                <h4>📅 Дата создания</h4>
+                <p id="aboutDate">Загрузка...</p>
+            </div>
+            <div class="about-section">
+                <h4>🔗 Ссылка-приглашение</h4>
+                <div class="invite-link-box" id="inviteLinkBox">
+                    <span id="inviteLink">Загрузка...</span>
+                    <button class="copy-link-btn" onclick="copyInviteLink()">📋</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Подписчики -->
+        <div id="channelMembers" class="channel-members" style="display: none;">
+            <div class="loading">Загрузка подписчиков...</div>
+        </div>
+        
+        <!-- Панель администратора -->
+        <div class="admin-panel" id="adminPanel" style="display: none;">
+            <button class="admin-btn" onclick="createPost()">📝 Создать пост</button>
+            <button class="admin-btn" onclick="editChannel()">✏️ Редактировать канал</button>
+            <button class="admin-btn delete" onclick="deleteChannel()">🗑️ Удалить канал</button>
+        </div>
+    </div>
+    
+    <script src="auth.js"></script>
+    <script src="channel.js"></script>
+</body>
+</html>

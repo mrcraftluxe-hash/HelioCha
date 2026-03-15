@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>HelioChat - Чат</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="chat-container">
+        <!-- шапка чата -->
+        <div class="chat-header">
+            <button class="back-btn" onclick="goBack()">←</button>
+            <div class="chat-user">
+                <div class="chat-avatar" id="chatUserAvatar">😊</div>
+                <div>
+                    <div class="chat-name" id="chatUserName">Загрузка...</div>
+                    <div class="chat-status" id="chatUserStatus">онлайн</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- сообщения -->
+        <div class="messages-container" id="messagesContainer"></div>
+        
+        <!-- индикатор записи -->
+        <div id="recordingIndicator" style="display:none; background:#8b3a3a; padding:10px; margin:10px; border-radius:30px; justify-content:space-between; align-items:center;">
+            <span>🔴 Запись кружка <span id="recordingTimer">0:00</span></span>
+            <button onclick="stopCircleRecording()" style="background:white; border:none; color:#8b3a3a; padding:5px 15px; border-radius:20px; cursor:pointer;">⏹️ Стоп</button>
+        </div>
+        
+        <!-- превью видео -->
+        <div id="videoPreview" style="display:none; position:fixed; bottom:80px; right:20px; width:120px; height:213px; border-radius:20px; overflow:hidden; border:2px solid #2b5278; box-shadow:0 0 20px rgba(0,0,0,0.5);">
+            <video id="previewVideo" autoplay muted style="width:100%; height:100%; object-fit:cover;"></video>
+        </div>
+        
+        <!-- ввод -->
+        <div class="message-input-area">
+            <button class="attach-btn" onclick="chooseFromGallery()" title="Выбрать фото из галереи">📷</button>
+            <button class="attach-btn" onmousedown="startCircleRecording()" onmouseup="stopCircleRecording()" ontouchstart="startCircleRecording()" ontouchend="stopCircleRecording()" title="Записать кружок (удерживать)">📹</button>
+            <input type="text" id="messageInput" placeholder="Сообщение..." onkeypress="checkEnter(event)">
+            <button class="send-btn" onclick="sendMessage()">➤</button>
+        </div>
+    </div>
+    
+    <script src="auth.js"></script>
+    <script src="chat.js"></script>
+</body>
+</html>

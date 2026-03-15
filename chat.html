@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>HelioChat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="chats-container">
+        <!-- шапка -->
+        <div class="chats-header">
+            <button class="menu-btn" onclick="toggleMenu()">☰</button>
+            <h2>HelioChat</h2>
+            <button class="new-chat-btn" onclick="showCreateOptions()">➕</button>
+        </div>
+        
+        <!-- меню -->
+        <div class="side-menu" id="sideMenu">
+            <div class="menu-header">
+                <span>Меню</span>
+                <button class="close-menu" onclick="toggleMenu()">✕</button>
+            </div>
+            <div class="menu-items">
+                <div class="menu-item" onclick="window.location.href='profile.html'">
+                    <span class="menu-icon">👤</span>
+                    <span class="menu-text">Профиль</span>
+                </div>
+                <div class="menu-item" onclick="openSettings()">
+                    <span class="menu-icon">⚙️</span>
+                    <span class="menu-text">Настройки</span>
+                </div>
+                <div class="menu-item" onclick="openCrystals()">
+                    <span class="menu-icon">💎</span>
+                    <span class="menu-text">Кристаллы</span>
+                    <span class="menu-badge" id="crystalBalance">150</span>
+                </div>
+                <div class="menu-item" onclick="window.location.href='gift.html'">
+                    <span class="menu-icon">🎁</span>
+                    <span class="menu-text">Подарки</span>
+                    <span class="menu-badge" id="giftBadge">0</span>
+                </div>
+                <div class="menu-item" onclick="openVIP()">
+                    <span class="menu-icon">⭐</span>
+                    <span class="menu-text">VIP статус</span>
+                    <span class="menu-badge vip" id="vipStatus">Нет</span>
+                </div>
+                <div class="menu-divider"></div>
+                <div class="menu-item" onclick="openHelp()">
+                    <span class="menu-icon">❓</span>
+                    <span class="menu-text">Помощь</span>
+                </div>
+                <div class="menu-item logout" onclick="logout()">
+                    <span class="menu-icon">🚪</span>
+                    <span class="menu-text">Выйти</span>
+                </div>
+            </div>
+            <div class="menu-footer">
+                <span>HelioChat BETA 1.0</span>
+            </div>
+        </div>
+        <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+        
+        <!-- поиск -->
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Поиск..." onkeyup="searchChats()">
+        </div>
+        
+        <!-- вкладки -->
+        <div class="tabs-container">
+            <button class="tab-btn-chat active" onclick="switchTab('chats')">💬 Чаты</button>
+            <button class="tab-btn-channel" onclick="switchTab('channels')">📢 Каналы</button>
+        </div>
+        
+        <!-- список чатов -->
+        <div id="chatsList" class="chats-list"></div>
+        
+        <!-- список каналов (скрыт по умолчанию) -->
+        <div id="channelsList" class="channels-list" style="display: none;"></div>
+    </div>
+    
+    <script src="auth.js"></script>
+    <script src="main.js"></script>
+    <script src="themes.js"></script>
+</body>
+</html>

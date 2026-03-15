@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>HelioChat - Конфиденциальность</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="privacy-page">
+        <!-- Шапка -->
+        <div class="privacy-header">
+            <button class="back-btn" onclick="goBack()">←</button>
+            <h2>🔒 Конфиденциальность</h2>
+            <button class="save-btn" onclick="savePrivacySettings()">💾 Сохранить</button>
+        </div>
+        
+        <!-- Кто может видеть -->
+        <div class="privacy-section">
+            <h3>👁️ Кто может видеть</h3>
+            
+            <div class="privacy-item">
+                <label>Время последнего посещения</label>
+                <select id="lastSeen">
+                    <option value="everyone">Все</option>
+                    <option value="contacts">Мои контакты</option>
+                    <option value="nobody">Никто</option>
+                </select>
+            </div>
+            
+            <div class="privacy-item">
+                <label>Фото профиля</label>
+                <select id="profilePhoto">
+                    <option value="everyone">Все</option>
+                    <option value="contacts">Мои контакты</option>
+                    <option value="nobody">Никто</option>
+                </select>
+            </div>
+            
+            <div class="privacy-item">
+                <label>Информация обо мне</label>
+                <select id="bio">
+                    <option value="everyone">Все</option>
+                    <option value="contacts">Мои контакты</option>
+                    <option value="nobody">Никто</option>
+                </select>
+            </div>
+            
+            <div class="privacy-item">
+                <label>Мои сообщения</label>
+                <select id="messages">
+                    <option value="everyone">Все</option>
+                    <option value="contacts">Мои контакты</option>
+                    <option value="nobody">Никто</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- Кто может связываться -->
+        <div class="privacy-section">
+            <h3>📞 Кто может связываться</h3>
+            
+            <div class="privacy-item">
+                <label>Звонки</label>
+                <select id="calls">
+                    <option value="everyone">Все</option>
+                    <option value="contacts">Мои контакты</option>
+                    <option value="nobody">Никто</option>
+                </select>
+            </div>
+            
+            <div class="privacy-item">
+                <label>Приглашения в группы</label>
+                <select id="groups">
+                    <option value="everyone">Все</option>
+                    <option value="contacts">Мои контакты</option>
+                    <option value="nobody">Никто</option>
+                </select>
+            </div>
+            
+            <div class="privacy-item">
+                <label>Приглашения в каналы</label>
+                <select id="channels">
+                    <option value="everyone">Все</option>
+                    <option value="contacts">Мои контакты</option>
+                    <option value="nobody">Никто</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- Пересылка сообщений -->
+        <div class="privacy-section">
+            <h3>🔄 Пересылка сообщений</h3>
+            
+            <div class="privacy-item">
+                <label>Кто может пересылать мои сообщения</label>
+                <select id="forwarding">
+                    <option value="everyone">Все</option>
+                    <option value="contacts">Мои контакты</option>
+                    <option value="nobody">Никто</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- Черный список -->
+        <div class="privacy-section">
+            <div class="section-header">
+                <h3>🚫 Черный список</h3>
+                <button class="add-btn" onclick="blockUser()">➕ Добавить</button>
+            </div>
+            <div class="blocked-users-list" id="blockedUsersList">
+                <div class="no-users">Загрузка...</div>
+            </div>
+        </div>
+        
+        <!-- Скрытые пользователи -->
+        <div class="privacy-section">
+            <div class="section-header">
+                <h3>👤 Скрытые пользователи</h3>
+                <button class="add-btn" onclick="hideUser()">➕ Добавить</button>
+            </div>
+            <div class="hidden-users-list" id="hiddenUsersList">
+                <div class="no-users">Загрузка...</div>
+            </div>
+        </div>
+        
+        <!-- Кнопка сброса -->
+        <div class="privacy-footer">
+            <button class="reset-btn" onclick="resetPrivacySettings()">🔄 Сбросить настройки</button>
+        </div>
+    </div>
+    
+    <script src="auth.js"></script>
+    <script src="privacy.js"></script>
+</body>
+</html>

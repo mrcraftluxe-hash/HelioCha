@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>HelioChat - Профиль</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="profile-page">
+        <!-- Шапка -->
+        <div class="profile-header">
+            <button class="back-btn" onclick="goBack()">←</button>
+            <h2>Мой профиль</h2>
+            <button class="edit-btn" onclick="editProfile()">✏️</button>
+        </div>
+        
+        <!-- Аватар -->
+        <div class="profile-avatar-section">
+            <div class="profile-big-avatar" id="profileBigAvatar" onclick="changeAvatar()">😊</div>
+            <button class="change-avatar-btn" onclick="changeAvatar()">Изменить аватар</button>
+        </div>
+        
+        <!-- Информация -->
+        <div class="profile-info-section">
+            <div class="info-item">
+                <span class="info-label">👤 Имя</span>
+                <span class="info-value" id="profileDisplayName">Загрузка...</span>
+            </div>
+            
+            <div class="info-item">
+                <span class="info-label">🔗 Username</span>
+                <div class="info-value-with-action">
+                    <span class="info-value" id="profileDisplayUsername">@загрузка</span>
+                    <button class="copy-btn" onclick="copyUserId()" title="Копировать">📋</button>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <span class="info-label">📧 Email</span>
+                <span class="info-value" id="profileDisplayEmail">загрузка...</span>
+            </div>
+            
+            <div class="info-item">
+                <span class="info-label">🆔 ID</span>
+                <div class="info-value-with-action">
+                    <span class="info-value" id="profileDisplayId">загрузка...</span>
+                    <button class="copy-btn" onclick="copyUserId()" title="Копировать">📋</button>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <span class="info-label">📅 Регистрация</span>
+                <span class="info-value" id="profileDisplayDate">загрузка...</span>
+            </div>
+        </div>
+        
+        <!-- Статистика -->
+        <div class="profile-stats">
+            <h3>📊 Статистика</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-icon">💬</span>
+                    <span class="stat-value" id="userMessagesCount">0</span>
+                    <span class="stat-label">Сообщений</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon">📢</span>
+                    <span class="stat-value" id="userChannelsCount">0</span>
+                    <span class="stat-label">Каналов</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon">🎁</span>
+                    <span class="stat-value" id="userGiftsCount">0</span>
+                    <span class="stat-label">Подарков</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon">👥</span>
+                    <span class="stat-value" id="userFriendsCount">0</span>
+                    <span class="stat-label">Чатов</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Настройки -->
+        <div class="profile-settings">
+            <h3>⚙️ Настройки</h3>
+            
+            <!-- КНОПКА ТЕМ -->
+            <div class="settings-item" onclick="openThemeMenu()">
+                <span class="settings-icon">🎨</span>
+                <span class="settings-text">Темы оформления</span>
+                <span class="settings-value" id="currentThemeName">Светлая</span>
+                <span class="settings-arrow">→</span>
+            </div>
+            
+            <div class="settings-item" onclick="openPrivacy()">
+                <span class="settings-icon">🔒</span>
+                <span class="settings-text">Конфиденциальность</span>
+                <span class="settings-arrow">→</span>
+            </div>
+            
+            <div class="settings-item" onclick="showQRCode()">
+                <span class="settings-icon">📱</span>
+                <span class="settings-text">Мой QR код</span>
+                <span class="settings-arrow">→</span>
+            </div>
+        </div>
+        
+        <!-- Выход -->
+        <div class="profile-actions">
+            <button class="logout-btn" onclick="logout()">🚪 Выйти</button>
+        </div>
+    </div>
+    
+    <script src="auth.js"></script>
+    <script src="profile.js"></script>
+    <script src="themes.js"></script>
+</body>
+</html>
