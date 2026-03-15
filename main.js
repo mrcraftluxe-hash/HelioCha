@@ -882,7 +882,7 @@ function createChannelSubmit() {
 
 // ========== БАЗА USERNAME ДЛЯ АДМИНОВ ==========
 const ADMIN_USERNAMES = [
-    'danya',
+    'mrcraftluxeyt',
     'admin',
     'yourusername',  // сюда свой username
     'moderator',
