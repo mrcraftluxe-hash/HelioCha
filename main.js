@@ -879,3 +879,26 @@ function createChannelSubmit() {
     alert('✅ Канал @' + username + ' создан!');
     closeModal();
 }
+
+// ========== БАЗА USERNAME ДЛЯ АДМИНОВ ==========
+const ADMIN_USERNAMES = [
+    'danya',
+    'admin',
+    'yourusername',  // сюда свой username
+    'moderator',
+    'owner'
+];
+
+// ========== ПРОВЕРКА НА АДМИНА ==========
+function isAdmin() {
+    if (!currentUser) return false;
+    const username = (currentUser.userUsername || currentUser.username || '').toLowerCase();
+    return ADMIN_USERNAMES.includes(username);
+}
+
+// ========== ПРИМЕР ИСПОЛЬЗОВАНИЯ ==========
+// if (isAdmin()) {
+//     // показывать админ-панель
+//     // удалять сообщения
+//     // банить пользователей
+// }
