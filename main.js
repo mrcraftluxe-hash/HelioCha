@@ -37,9 +37,9 @@ function getCrystalBalance() {
     if (hasInfiniteCrystals()) return '∞';
     try {
         const crystals = localStorage.getItem('crystals_' + currentUser.id);
-        return crystals ? parseInt(crystals) : 150;
+        return crystals ? parseInt(crystals) : 0;
     } catch (e) {
-        return 150;
+        return 0;
     }
 }
 
