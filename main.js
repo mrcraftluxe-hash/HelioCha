@@ -902,3 +902,154 @@ function isAdmin() {
 //     // удалять сообщения
 //     // банить пользователей
 // }
+
+// ========== АДМИН КОНСОЛЬ ==========
+function openAdminConsole() {
+    if (!isAdmin()) {
+        alert('❌ Только для администраторов');
+        return;
+    }
+    
+    closeMenu();
+    
+    // собираем статистику
+    let users = JSON.parse(localStorage.getItem('helioUsers')) || [];
+    let messages = JSON.parse(localStorage.getItem('helioMessages')) || [];
+    let channels = JSON.parse(localStorage.getItem('channels')) || [];
+    let groups = JSON.parse(localStorage.getItem('groups')) || [];
+    
+    let totalCrystals = 0;
+    for (let i = 0; i < users.length; i++) {
+        const crystals = localStorage.getItem('crystals_' + users[i].id);
+        if (crystals) totalCrystals += parseInt(crystals);
+    }
+    
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.innerHTML = `
+        <div style="background: var(--bg-card); padding: 24px; border-radius: 24px; width: 340px; max-width: 90%; max-height: 80vh; overflow-y: auto;">
+            <h3 style="color: var(--text-primary); text-align: center; margin-bottom: 20px;">👑 Админ-панель</h3>
+            
+            <div style="background: var(--bg-element); padding: 16px; border-radius: 16px; margin-bottom: 20px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <span style="color: var(--text-secondary);">Пользователей:</span>
+                    <span style="color: var(--accent); font-weight: bold;">${users.length}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <span style="color: var(--text-secondary);">Сообщений:</span>
+                    <span style="color: var(--accent); font-weight: bold;">${messages.length}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <span style="color: var(--text-secondary);">Каналов:</span>
+                    <span style="color: var(--accent); font-weight: bold;">${channels.length}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <span style="color: var(--text-secondary);">Групп:</span>
+                    <span style="color: var(--accent); font-weight: bold;">${groups.length}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="color: var(--text-secondary);">Всего кристаллов:</span>
+                    <span style="color: var(--accent); font-weight: bold;">${totalCrystals} 💎</span>
+                </div>
+            </div>
+            
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px;">
+                <button onclick="showAllUsers()" style="padding: 14px; background: var(--bg-element); border: 1px solid var(--border); border-radius: 16px; color: var(--text-primary); cursor: pointer; text-align: left;">
+                    👥 Список всех пользователей
+                </button>
+                <button onclick="clearAllMessages()" style="padding: 14px; background: var(--bg-element); border: 1px solid var(--border); border-radius: 16px; color: #f44336; cursor: pointer; text-align: left;">
+                    🗑️ Очистить все сообщения
+                </button>
+                <button onclick="backupData()" style="padding: 14px; background: var(--bg-element); border: 1px solid var(--border); border-radius: 16px; color: var(--accent); cursor: pointer; text-align: left;">
+                    💾 Скачать бэкап данных
+                </button>
+            </div>
+            
+            <button onclick="closeModal()" style="width: 100%; padding: 14px; background: var(--accent); border: none; border-radius: 16px; color: white; cursor: pointer;">Закрыть</button>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+}
+
+// ========== ПОКАЗАТЬ ВСЕХ ПОЛЬЗОВАТЕЛЕЙ ==========
+function showAllUsers() {
+    closeModal();
+    
+    let users = JSON.parse(localStorage.getItem('helioUsers')) || [];
+    
+    let list = '👥 ВСЕ ПОЛЬЗОВАТЕЛИ:\n\n';
+    for (let i = 0; i < users.length; i++) {
+        const u = users[i];
+        list += `${i+1}. ${u.displayName || u.name || u.username} (${u.userUsername ? '@' + u.userUsername : 'нет юзера'})\n`;
+        list += `   ID: ${u.id}\n`;
+        list += `   Тел: ${u.phone || 'нет'}\n\n`;
+    }
+    
+    alert(list);
+}
+
+// ========== ОЧИСТИТЬ ВСЕ СООБЩЕНИЯ ==========
+function clearAllMessages() {
+    if (!isAdmin()) return;
+    
+    if (confirm('⚠️ Удалить ВСЕ сообщения? Это нельзя отменить!')) {
+        localStorage.setItem('helioMessages', '[]');
+        alert('✅ Все сообщения удалены');
+    }
+}
+
+// ========== БЭКАП ДАННЫХ ==========
+function backupData() {
+    if (!isAdmin()) return;
+    
+    const data = {
+        users: JSON.parse(localStorage.getItem('helioUsers')) || [],
+        messages: JSON.parse(localStorage.getItem('helioMessages')) || [],
+        channels: JSON.parse(localStorage.getItem('channels')) || [],
+        groups: JSON.parse(localStorage.getItem('groups')) || [],
+        crystals: {},
+        settings: {},
+        timestamp: new Date().toISOString()
+    };
+    
+    // собираем кристаллы
+    for (let i = 0; i < data.users.length; i++) {
+        const id = data.users[i].id;
+        data.crystals[id] = localStorage.getItem('crystals_' + id) || 0;
+    }
+    
+    const json = JSON.stringify(data, null, 2);
+    const blob = new Blob([json], {type: 'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `heliochat_backup_${new Date().toISOString().slice(0,10)}.json`;
+    a.click();
+    
+    alert('✅ Бэкап скачан');
+}
+
+// ========== ДОБАВИТЬ КРИСТАЛЛЫ ПОЛЬЗОВАТЕЛЮ ==========
+function addCrystalsToUser() {
+    if (!isAdmin()) return;
+    
+    const userId = prompt('Введите ID пользователя:');
+    if (!userId) return;
+    
+    let users = JSON.parse(localStorage.getItem('helioUsers')) || [];
+    const user = users.find(u => u.id == userId);
+    
+    if (!user) {
+        alert('❌ Пользователь не найден');
+        return;
+    }
+    
+    const amount = parseInt(prompt('Сколько кристаллов добавить?'));
+    if (!amount || amount < 1) return;
+    
+    const current = parseInt(localStorage.getItem('crystals_' + userId)) || 0;
+    localStorage.setItem('crystals_' + userId, current + amount);
+    
+    alert(`✅ Добавлено ${amount} кристаллов пользователю ${user.displayName || user.name || user.username}`);
+}
