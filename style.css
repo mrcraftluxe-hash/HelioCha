@@ -2978,3 +2978,88 @@ input:checked + .slider:before {
     color: var(--text-secondary);
     font-size: 13px;
 }
+
+/* ========== АДАПТАЦИЯ ДЛЯ ПК ========== */
+@media screen and (min-width: 768px) {
+    body {
+        background: linear-gradient(135deg, #0a0c10 0%, #1a1e24 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+    }
+    
+    .chats-container, 
+    .chat-container, 
+    .profile-page, 
+    .gifts-page, 
+    .privacy-page,
+    .settings-page {
+        max-width: 420px;
+        margin: 0;
+        border-radius: 32px;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        height: 90vh;
+        overflow: hidden;
+    }
+    
+    .chats-container {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .chats-list, 
+    .messages-container,
+    .gifts-list,
+    .settings-section:last-child {
+        overflow-y: auto;
+        flex: 1;
+    }
+    
+    /* красивая прокрутка */
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: rgba(255,255,255,0.05);
+        border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: var(--accent);
+        border-radius: 10px;
+    }
+}
+
+/* для больших экранов */
+@media screen and (min-width: 1200px) {
+    .chats-container, 
+    .chat-container, 
+    .profile-page, 
+    .gifts-page, 
+    .privacy-page,
+    .settings-page {
+        max-width: 440px;
+        height: 85vh;
+    }
+}
+
+/* для мобилок вертикальная ориентация */
+@media screen and (max-width: 767px) {
+    body {
+        background: var(--bg-page);
+    }
+    
+    .chats-container, 
+    .chat-container, 
+    .profile-page, 
+    .gifts-page, 
+    .privacy-page,
+    .settings-page {
+        max-width: 100%;
+        border-radius: 0;
+        height: 100vh;
+    }
+}
